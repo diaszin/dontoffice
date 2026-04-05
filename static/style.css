@@ -1,0 +1,64 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#app-title > #creator{
+    font-size: 1rem;
+}
+
+
+
+#create-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+#create-secret-page-input{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+}
+
+
+#create-secret-page-input > .app-url-field{
+    color: #989;
+    height: 100%;
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 600;
+    border: none;
+}
+
+
+#create-secret-page-input > input{
+    padding: 10px;
+    border: none;
+    width: 100%;
+    outline: none;
+}
+
+
+#create-secret-page-input > input:focus{
+   border-bottom: 1px solid #989;
+}
+
+
+
+#create-form > button{
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
