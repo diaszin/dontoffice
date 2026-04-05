@@ -1,0 +1,1 @@
+INSERT INTO urls (secret_page_name) VALUES (?)
