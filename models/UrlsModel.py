@@ -12,10 +12,16 @@ class UrlsModel:
             open("sql/buscar-url.sql", "r") as search_sql,
         ):
             cursor = conn.cursor()
-            result = conn.execute(search_sql.read(), (self.secret_page_name,)).fetchone()
+            result = self.read_one()
             if result is None:
                 cursor.execute(sql.read(), (self.secret_page_name,))
                 conn.commit()
+
+                result = self.read_one()
+                return result[0]
+            
+
+            return result[0]
 
     def read_all(self):
         with (

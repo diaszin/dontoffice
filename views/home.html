@@ -10,19 +10,23 @@
 
 <body>
     <div id="principal">
-        <h1 id="app-title">DONTOFFICE <sup id="creator">By Kaique Dias</p></h1>
-       
-            <div id="create-container">
-                <form id="create-form" action="/create" method="post">
-                    <div id="create-secret-page-input">
-                        <div class="app-url-field">
-                            dontoffice.com/
-                        </div>
-                        <input type="text" placeholder="sua-pagina-secreta" name="secret_page_name">
+        <h1 id="app-title">DONTOFFICE <sup id="creator">By Kaique Dias</p>
+        </h1>
+
+        <div id="create-container">
+            <form id="create-form" action="/create" method="post" enctype="multipart/form-data">
+                <div id="create-secret-page-input">
+                    <div class="app-url-field">
+                        dontoffice.com/
                     </div>
-                    <button>Criar</button>
-                </form>
-            </div>
+                    <input type="text" placeholder="sua-pagina-secreta" name="secret_page_name">
+                </div>
+                <div id="create--secret-page-file-import">
+                    <input type="file" name="file" id="file">
+                </div>
+                <button>Criar</button>
+            </form>
+        </div>
     </div>
 </body>
 

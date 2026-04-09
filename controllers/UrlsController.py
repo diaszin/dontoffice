@@ -4,10 +4,10 @@ class UrlsController:
         self.urls = UrlsModel(secret_page_name)
 
     def create(self):
-        self.urls.create()
+        return self.urls.create()
 
     def read(self):
-        self.urls.read()
+        return self.urls.read()
 
     def update(self):
         self.urls.update()
