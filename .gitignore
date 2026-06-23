@@ -1,6 +1,0 @@
-*.duckdb
-__pycache__
-
-
-# Armazenamento de arquivos
-bucket/

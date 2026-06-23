@@ -1,6 +1,0 @@
-CREATE SEQUENCE IF NOT EXISTS url_id_seq;
-
-CREATE TABLE IF NOT EXISTS urls (
-    id INTEGER PRIMARY KEY DEFAULT NEXTVAL('url_id_seq'),
-    secret_page_name VARCHAR(255) NOT NULL,
-)
