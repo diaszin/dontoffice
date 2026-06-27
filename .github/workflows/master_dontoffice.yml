@@ -54,3 +54,4 @@ jobs:
           app-name: 'dontoffice'
           slot-name: 'Production'
           package: ./app
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48B0EAFA0F9946D1B6A1273C23F492CC }}
