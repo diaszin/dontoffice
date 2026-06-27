@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "dontppt/Introdução.md",
+                "file": "Introdução.md",
                 "mode": "source",
                 "source": false
               },
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "dontppt/Introdução.md",
+                "file": "Introdução.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -128,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "dontppt/Introdução.md",
+                "file": "Introdução.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -171,7 +171,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "dontppt/Introdução.md",
+                "file": "Introdução.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -212,8 +212,8 @@
   },
   "active": "63735d7166f47a94",
   "lastOpenFiles": [
-    "Introdução.md",
     "dontppt/Introdução.md",
+    "Introdução.md",
     "^dontppt/Introdução.md",
     "^dontppt",
     "[dontppt/Introdução.md",

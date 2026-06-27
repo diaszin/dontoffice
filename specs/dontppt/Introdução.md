@@ -15,3 +15,4 @@ O dontppt é a ferramenta de apresentação de slide. O objetivo principal não 
 8. O usuário poderá permitir a visualização automática dos slides
 9. O usuário deverá inserir o tempo de avanço dos slides para a visualização automática dos slides
 10. o sistema deve permitir a importação do slide através da técnica drag-and-drop
+11. O usuário poderá pesquisar rotas criadas no sistema
