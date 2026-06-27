@@ -4,39 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "f3175987e48ce5b2",
+        "id": "a1c05f3185f8371b",
         "type": "tabs",
         "children": [
           {
-            "id": "28b8cf9c40bc01b7",
+            "id": "904b964808f2dc43",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Introdução.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Introdução"
-            }
-          },
-          {
-            "id": "63735d7166f47a94",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Introdução.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Introdução"
+              "title": "Nova aba"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -210,7 +191,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "63735d7166f47a94",
+  "active": "d0720407cbb5cb8b",
   "lastOpenFiles": [
     "dontppt/Introdução.md",
     "Introdução.md",
