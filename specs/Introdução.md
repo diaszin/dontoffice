@@ -3,6 +3,11 @@ O projeto dontoffice é um hub de ferramentas de escritório que tem como objeti
 Os principais módulos/funcionalidades devem espelhar as ferramentas de escritórios já inseridas no mercado, como o Microsoft Office, Google Docs ou LibreOffice.
 
 
+## Design
+Os designs serão desenhados e publicados no Figma
+
+https://www.figma.com/design/eMdESjliPcRBobRS1gha3t/DONT-OFFICE?node-id=0-1&t=q8ypTgXAXtD8avFT-1
+
 
 ## Módulos
 
