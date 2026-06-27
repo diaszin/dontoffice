@@ -18,4 +18,4 @@ Os módulos são:
 * Todos os módulos deverá conter testes e2e(end-to-end)
 
 ### Negócio
-* Para fins de escabilidade e melhoria do produto, devemos manter o rastro que o usuário segue no nosso sistema
+* Para fins de escalabilidade e melhoria do produto, devemos manter o rastro que o usuário segue no nosso sistema
