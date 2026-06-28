@@ -34,10 +34,7 @@ jobs:
       - name: Export requirements.txt
         working-directory: ./api
         run: |
-          poetry export \
-            --format=requirements.txt \
-            --output=requirements.txt \
-            --without-hashes
+          poetry export --format=requirements.txt --output=requirements.txt --without-hashes
 
       # Opcional
       - name: Run tests
