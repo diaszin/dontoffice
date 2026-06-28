@@ -14,50 +14,48 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.12"
 
       - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
           pip install poetry
+          poetry self add poetry-plugin-export
 
       - name: Install dependencies
         working-directory: ./api
         run: |
           poetry install --only main --no-interaction
-      
-      - name: Install Export Plugin
-        working-directory: ./api
-        run: |
-            poetry self add poetry-plugin-export
 
       - name: Export requirements.txt
         working-directory: ./api
         run: |
-          poetry export --format=requirements.txt --output=requirements.txt --without-hashes
+          poetry export \
+            --format=requirements.txt \
+            --output=requirements.txt \
+            --without-hashes
 
-      # Opcional
       - name: Run tests
         working-directory: ./api
         run: |
           poetry run pytest || true
 
-      - name: Upload artifact for deployment
+      - name: Prepare deployment package
+        run: |
+          mkdir deploy
+          cp -R api/. deploy/
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            .
-            !.venv/
-            !.git/
-            !.github/
-            !__pycache__/
-            !tests/
+          path: deploy/
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,9 +66,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
+          path: .
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
+      - name: Deploy
         uses: azure/webapps-deploy@v3
         with:
           app-name: dontoffice-api
