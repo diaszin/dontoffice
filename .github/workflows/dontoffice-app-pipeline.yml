@@ -12,10 +12,15 @@ on:
       - master
     paths:
       - 'app/**'
+  workflow_run:
+    workflows:
+      - Deploy backend no Azure App
+    types:
+      - completed
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed') && github.event.workflow_run.conclusion == 'success' 
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
