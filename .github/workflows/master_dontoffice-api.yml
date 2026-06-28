@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./api
         run: |
-          poetry install --only main --no-
+          poetry install --only main --no-interaction
       
       - name: Install Export Plugin
         working-directory: ./api
