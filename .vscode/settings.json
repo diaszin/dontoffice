@@ -1,4 +1,13 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:poetry",
-    "python-envs.defaultPackageManager": "ms-python.python:poetry"
+    "python-envs.defaultPackageManager": "ms-python.python:poetry",
+    "files.readonlyInclude": {
+        "**/routeTree.gen.ts": true
+    },
+    "files.watcherExclude": {
+        "**/routeTree.gen.ts": true
+    },
+    "search.exclude": {
+        "**/routeTree.gen.ts": true
+    }
 }

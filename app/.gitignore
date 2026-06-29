@@ -25,3 +25,8 @@ dist-ssr
 
 
 yarn.lock
+
+
+# Arquivo gerado por bibliotecas
+
+**/routeTree.gen.ts
