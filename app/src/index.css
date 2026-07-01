@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 
-:root {
+:root { 
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -17,8 +17,17 @@
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+  --primary-font: 'Hanken Grotesk', sans-serif;
 
-  font: 18px/145% var(--sans);
+  /* Regra de ouro para escalonamento de fontes */
+  --gold-rule: 1.618;
+  --base-font-size: 16px; /* Tamanho base da fonte */
+  --subtitle-font-size: calc(var(--base-font-size) * var(--gold-rule));
+  --title-font-size: calc(var(--subtitle-font-size) * var(--gold-rule));
+  --display-font-size: calc(var(--title-font-size) * var(--gold-rule));
+  --legend-font-size: calc(var(--base-font-size) / var(--gold-rule));
+
+  font: var(--base-font-size)/145% var(--primary-font);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -53,4 +62,21 @@
 
 body {
   margin: 0;
+}
+
+
+.ds-display {
+  font-size: var(--display-font-size);
+}
+
+.ds-title {
+  font-size: var(--title-font-size);
+}
+
+.ds-subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.ds-legend {
+  font-size: var(--legend-font-size);
 }

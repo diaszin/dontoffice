@@ -10,7 +10,7 @@ export default function DefaultDontofficeLogo(props: DefaultDontofficeLogo) {
     <div className={props.className}>
       <span className="font-black tracking-tighter text-black ">Dont</span>
       <span
-        className="font-black tracking-tighter bg-clip-text text-transparent"
+        className="font-black tracking-tighter bg-clip-text text-transparent ml-4"
         style={{
           backgroundImage: `linear-gradient(90deg, ${props.initialGradientColor}, ${props.finalGradientColor})`,
           WebkitBackgroundClip: "text",
