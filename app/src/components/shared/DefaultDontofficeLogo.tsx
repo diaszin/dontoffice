@@ -12,6 +12,7 @@ export default function DefaultDontofficeLogo(props: DefaultDontofficeLogo) {
       <span
         className="font-black tracking-tighter bg-clip-text text-transparent ml-4"
         style={{
+          // Aplica gradiente no texto (evita problema de renderização do gradiente no Safari e build)
           backgroundImage: `linear-gradient(90deg, ${props.initialGradientColor}, ${props.finalGradientColor})`,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
