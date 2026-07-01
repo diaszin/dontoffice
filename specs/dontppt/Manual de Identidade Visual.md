@@ -14,4 +14,9 @@ A palavra **.ppt** (Nome da aplicação) deve ser depois da palavra **dont** (Hu
 | Titulo              | 40px             |
 | Subtitulo           | 24px             |
 | Corpo/CTAs          | 16px             |
-| Legenda             | 12               |
+| Legenda             | 12px             |
+
+## Textos
+
+### Slogan
+Sua próxima apresentação, simples assim.
