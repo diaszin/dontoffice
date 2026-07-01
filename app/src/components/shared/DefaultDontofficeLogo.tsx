@@ -2,32 +2,19 @@ interface DefaultDontofficeLogo {
   name: string;
   initialGradientColor: string;
   finalGradientColor: string;
-  className?: string
+  className?: string;
 }
 
 export default function DefaultDontofficeLogo(props: DefaultDontofficeLogo) {
-  const gradientClassName = `
-      font-black
-      tracking-tighter
-      bg-[linear-gradient(90deg,${props.initialGradientColor}_0%,${props.finalGradientColor}_100%)]
-      bg-clip-text
-      text-transparent
-      
-    `;
   return (
     <div className={props.className}>
+      <span className="font-black tracking-tighter text-black ">Dont</span>
       <span
-        className="font-black tracking-tighter text-black "
+        className="font-black tracking-tighter bg-clip-text text-transparent"
         style={{
-          fontFamily: '"Hanken Grotesk", sans-serif',
-        }}
-      >
-        Dont
-      </span>
-      <span
-        className={gradientClassName}
-        style={{
-          fontFamily: '"Hanken Grotesk", sans-serif',
+          backgroundImage: `linear-gradient(90deg, ${props.initialGradientColor}, ${props.finalGradientColor})`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
         }}
       >
         {props.name}
