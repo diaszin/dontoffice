@@ -1,4 +1,5 @@
 import DefaultDontofficeLogo from "../../components/shared/DefaultDontofficeLogo";
+import DragAndDropFileUploadInput from "../../components/shared/DragAndDropFileUploadInput";
 import SlugInput from "../../components/shared/SlugInput";
 
 export function PPTCreatePage() {
@@ -15,6 +16,7 @@ export function PPTCreatePage() {
           Sua próxima apresentação, simples assim.
         </span>
         <div className="flex flex-col justify-center w-full gap-1">
+          <DragAndDropFileUploadInput/>
           <SlugInput placeholder="apresentacao-rapida" />
           <legend className="ds-legend text-gray-700">Esse é o nome que irá aparecer no seu link</legend>
         </div>
