@@ -20,3 +20,12 @@ A palavra **.ppt** (Nome da aplicação) deve ser depois da palavra **dont** (Hu
 
 ### Slogan
 Sua próxima apresentação, simples assim.
+
+
+## Cores
+
+| Tipo       | Hexadecimal |
+| ---------- | ----------- |
+| Principal  | C43E1C      |
+| Secundária | FF8C69      |
+
