@@ -72,7 +72,7 @@ export function PPTCreatePage() {
                     }}
                     onChange={(event) => {
                       const file: File | undefined =
-                        event.target?.files?.[0] || undefined;
+                        event.currentTarget.files?.[0] || undefined;
 
                       field.handleChange(file);
                     }}
