@@ -18,7 +18,7 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
   --primary-font: 'Hanken Grotesk', sans-serif;
-
+  
   /* Regra de ouro para escalonamento de fontes */
   --gold-rule: 1.618;
   --base-font-size: 16px; /* Tamanho base da fonte */
@@ -26,6 +26,9 @@
   --title-font-size: calc(var(--subtitle-font-size) * var(--gold-rule));
   --display-font-size: calc(var(--title-font-size) * var(--gold-rule));
   --legend-font-size: calc(var(--base-font-size) / var(--gold-rule));
+  
+  
+  --icon-size: calc(--base-font-size * --gold-rule);
 
   font: var(--base-font-size)/145% var(--primary-font);
   letter-spacing: 0.18px;
