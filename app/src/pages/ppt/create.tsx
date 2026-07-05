@@ -69,6 +69,7 @@ export function PPTCreatePage() {
                       const file = files.length > 0 ? files[0] : null;
 
                       field.handleChange(file);
+                      field.validate("change");
                     }}
                     onChange={(event) => {
                       const file: File | undefined =
@@ -80,21 +81,55 @@ export function PPTCreatePage() {
                 );
               }}
             />
-            <SlugInput
-              placeholder="apresentacao-rapida"
-              trailing={
-                <createForm.Subscribe
-                  selector={(state) => [state.canSubmit, state.isDirty]}
-                  children={([canSubmit, isDirty]) => (
-                    <button
-                      disabled={!canSubmit || !isDirty}
-                      className="cursor-pointer w-12 h-full flex items-center justify-center bg-[#C43E1C] text-white hover:bg-[#FF8C69] transition-colors disabled:opacity-30 disabled:bg-black"
-                    >
-                      <ChevronRight className="h-[50%]" />
-                    </button>
-                  )}
+            <createForm.Field
+              name="slug"
+              validators={{
+                onChange: ({ value }) => {
+                  if (!value) {
+                    return "A rota tem que ser obrigatória";
+                  }
+                },
+              }}
+              defaultValue={""}
+              children={(field) => (
+                <SlugInput
+                  name={field.name}
+                  id={field.name}
+                  placeholder="apresentacao-rapida"
+                  onChange={(event) => {
+                    field.handleChange(event.currentTarget.value);
+                  }}
+                  trailing={
+                    <createForm.Subscribe
+                      selector={(state) => [state.canSubmit, state.values]}
+                      children={([canSubmit, values]) => {
+                        const formValues = values as {
+                          file: File | undefined;
+                          slug: string;
+                        };
+                        const fileValue = formValues.file;
+                        const slugValue = formValues.slug;
+
+                        const isFormValid =
+                          canSubmit &&
+                          fileValue !== null &&
+                          fileValue !== undefined &&
+                          slugValue.trim() !== "";
+
+                        return (
+                          <button
+                            type="submit"
+                            disabled={!isFormValid}
+                            className="cursor-pointer w-12 h-full flex items-center justify-center bg-[#C43E1C] text-white hover:bg-[#FF8C69] transition-colors disabled:opacity-30 disabled:bg-black"
+                          >
+                            <ChevronRight className="h-[50%]" />
+                          </button>
+                        );
+                      }}
+                    />
+                  }
                 />
-              }
+              )}
             />
           </form>
           <legend className="ds-legend text-gray-700">
