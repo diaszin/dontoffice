@@ -66,9 +66,11 @@ export function PPTCreatePage() {
                       event.preventDefault();
 
                       const files = event.dataTransfer.files;
-                      const file = files.length > 0 ? files[0] : null;
+                      if (files) {
+                        const file = files.length > 0 ? files[0] : null;
 
-                      field.handleChange(file);
+                        field.handleChange(file);
+                      }
                       field.validate("change");
                     }}
                     onChange={(event) => {
