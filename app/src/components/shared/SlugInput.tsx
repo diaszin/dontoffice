@@ -5,6 +5,9 @@ interface SlugInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 function normalizeSlug(slug: string): string {
+  if(slug.trim().length === 0){
+    return ""
+  }
   return slug.replaceAll(" ", "-");
 }
 

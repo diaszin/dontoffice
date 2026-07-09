@@ -49,6 +49,8 @@ export function PPTCreatePage() {
                   const extension = file.name.split(".").at(-1);
                   const allowedExtensions = [".ppt", ".pps", ".pptx", ".ppsx"];
 
+                  console.log(!allowedExtensions.includes("." + extension));
+
                   if (
                     !extension ||
                     !allowedExtensions.includes("." + extension)
@@ -87,7 +89,9 @@ export function PPTCreatePage() {
               name="slug"
               validators={{
                 onChange: ({ value }) => {
-                  if (!value) {
+                  const slug = value as string;
+
+                  if (!slug) {
                     return "A rota tem que ser obrigatória";
                   }
                 },
@@ -99,7 +103,8 @@ export function PPTCreatePage() {
                   id={field.name}
                   placeholder="apresentacao-rapida"
                   onChange={(event) => {
-                    field.handleChange(event.currentTarget.value);
+                    const slug = event.currentTarget.value;
+                    field.handleChange(slug);
                   }}
                   trailing={
                     <createForm.Subscribe

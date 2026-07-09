@@ -1,17 +1,21 @@
 /// <reference types="cypress" />
 
 describe("Módulo_PPT", () => {
+  const ACCEPTED_FILE = "FORGE-Aplicativo-de-Academia.pptx"
+  const NOT_ACCEPTED_FILE = "Lista 03 Geometria Analítica e Álgebra Linear.pdf"
+
+
   beforeEach(() => {
     cy.visit("http://localhost:5173/ppt");
   });
 
   it("dado um arquivo de slides e um slug válido, quando o usuário clicar no botão de enviar, então deve ser criada uma página com o slide enviado", () => {
-    cy.fixture("FORGE-Aplicativo-de-Academia.pptx", null).then(
+    cy.fixture(ACCEPTED_FILE, null).then(
       (fileContent) => {
         cy.get("input[name='file']").selectFile(
           {
             contents: fileContent,
-            fileName: "slide.pptx",
+            fileName: ACCEPTED_FILE,
             mimeType:
               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
           },
@@ -30,12 +34,12 @@ describe("Módulo_PPT", () => {
   });
 
   it("deve manter o botão de Enviar desativado quando o slug estiver vazio e o arquivo for válido", () =>{
-    cy.fixture("FORGE-Aplicativo-de-Academia.pptx", null).then(
+    cy.fixture(ACCEPTED_FILE, null).then(
       (fileContent) => {
         cy.get("input[name='file']").selectFile(
           {
             contents: fileContent,
-            fileName: "slide.pptx",
+            fileName: ACCEPTED_FILE,
             mimeType:
               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
           },
@@ -58,7 +62,7 @@ describe("Módulo_PPT", () => {
         cy.get("input[name='file']").selectFile(
           {
             contents: fileContent,
-            fileName: "slide.pptx",
+            fileName: NOT_ACCEPTED_FILE,
             mimeType:
               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
           },
@@ -77,12 +81,12 @@ describe("Módulo_PPT", () => {
   })
 
   it("deve manter o botão de Enviar desativado quando o slug conter somente espaçamento em branco e o arquivo for válido", () =>{
-    cy.fixture("Lista 03 Geometria Analítica e Álgebra Linear.pdf", null).then(
+    cy.fixture(ACCEPTED_FILE, null).then(
       (fileContent) => {
         cy.get("input[name='file']").selectFile(
           {
             contents: fileContent,
-            fileName: "slide.pptx",
+            fileName: ACCEPTED_FILE,
             mimeType:
               "application/vnd.openxmlformats-officedocument.presentationml.presentation",
           },
@@ -94,7 +98,7 @@ describe("Módulo_PPT", () => {
     cy.get("button[type='submit']").should("be.disabled")
 
     cy.get("input[name='slug']").type("           ")
-    cy.get("input[name='slug']").should("have.value", "           ")
+    cy.get("input[name='slug']").should("have.value", "")
 
 
     cy.get("button[type='submit']").should("be.disabled")
