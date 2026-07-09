@@ -13,7 +13,7 @@ services:
 
   backend:
     build:
-      context: ./api
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - '8000:8000'
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./api:/app
+      - ./server:/app
       - venv:/app/.venv
     
 
