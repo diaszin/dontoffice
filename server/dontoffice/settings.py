@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "dontoffice.ppt"
 ]
 
 MIDDLEWARE = [
@@ -72,6 +74,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "dontoffice.wsgi.application"
 
+MEDIA_ROOT = BASE_DIR / "upload"
+
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -86,7 +90,7 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT"),
         "OPTIONS": {
             "driver": "ODBC Driver 18 for SQL Server",
-            "extra_params": "Encrypt=no;TrustServerCertificate=yes;"
+            "extra_params": "Encrypt=no;TrustServerCertificate=yes;",
         },
     }
 }
