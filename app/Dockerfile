@@ -3,6 +3,7 @@ FROM node:24-alpine
 WORKDIR /app
 
 COPY package*.json ./
+COPY .env ./
 RUN npm install
 
 COPY . .

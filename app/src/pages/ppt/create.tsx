@@ -3,13 +3,13 @@ import DefaultDontofficeLogo from "../../components/shared/DefaultDontofficeLogo
 import DragAndDropFileUploadInput from "../../components/shared/DragAndDropFileUploadInput";
 import SlugInput from "../../components/shared/SlugInput";
 import { ChevronRight } from "lucide-react";
+import createRoute from "../../usecases/ppt/create-route";
 
-function createPPTRoute(file: File, slug: string) {}
 
 export function PPTCreatePage() {
   const createForm = useForm({
     onSubmit: ({ value }) => {
-      console.log(value);
+      createRoute(value.slug, value.file)
     },
     canSubmitWhenInvalid: false,
   });

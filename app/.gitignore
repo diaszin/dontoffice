@@ -32,3 +32,6 @@ yarn.lock
 **/routeTree.gen.ts
 cypress/screenshots/
 cypress/fixtures/
+
+.env
+.env.*
