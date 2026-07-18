@@ -7,4 +7,4 @@ from dontoffice.ppt.models import PPTRoute
 class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = PPTRoute
-        fields = ["slug", "upload"]
+        fields = ["slug", "upload", "updated_at"]
