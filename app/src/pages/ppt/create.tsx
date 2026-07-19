@@ -14,7 +14,7 @@ type CreatePageData = {
 export function PPTCreatePage() {
   const mutation = useMutation({
     mutationFn: async (data: CreatePageData) => {
-      const response = await createRoute(data.slug, data.file);
+      const response = createRoute(data.slug, data.file);
       return response;
     },
   });
