@@ -4,12 +4,26 @@ import DragAndDropFileUploadInput from "../../components/shared/DragAndDropFileU
 import SlugInput from "../../components/shared/SlugInput";
 import { ChevronRight } from "lucide-react";
 import createRoute from "../../usecases/ppt/create-route";
+import { useMutation } from "@tanstack/react-query";
 
+type CreatePageData = {
+  slug: string;
+  file: File;
+};
 
 export function PPTCreatePage() {
+  const mutation = useMutation({
+    mutationFn: async (data: CreatePageData) => {
+      const response = await createRoute(data.slug, data.file);
+      return response;
+    },
+  });
+
   const createForm = useForm({
     onSubmit: ({ value }) => {
-      createRoute(value.slug, value.file)
+      const data = value as CreatePageData;
+
+      mutation.mutate(data);
     },
     canSubmitWhenInvalid: false,
   });
