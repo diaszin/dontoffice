@@ -17,11 +17,12 @@ from dontoffice.ppt.serializers import RouteSerializer
 class RouteViewSet(viewsets.ModelViewSet):
     queryset = dontoffice.ppt.models.PPTRoute.objects.all()
     serializer_class = RouteSerializer
+    lookup_field = 'slug'
 
     permission_classes = [IsAdminOrReadOnlyDelete]
 
     @action(detail=True, methods=["get"], url_path="file")
-    def obter_bytes(self, request, pk=None):
+    def obter_bytes(self, request, *args, **kwargs):
         instancia = self.get_object()
         campo_arquivo = instancia.upload
 

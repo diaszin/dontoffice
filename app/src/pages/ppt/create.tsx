@@ -2,9 +2,10 @@ import { useForm } from "@tanstack/react-form";
 import DefaultDontofficeLogo from "../../components/shared/DefaultDontofficeLogo";
 import DragAndDropFileUploadInput from "../../components/shared/DragAndDropFileUploadInput";
 import SlugInput from "../../components/shared/SlugInput";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, LoaderCircle } from "lucide-react";
 import createRoute from "../../usecases/ppt/create-route";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 
 type CreatePageData = {
   slug: string;
@@ -12,11 +13,17 @@ type CreatePageData = {
 };
 
 export function PPTCreatePage() {
+  const navigate = useNavigate()
   const mutation = useMutation({
     mutationFn: async (data: CreatePageData) => {
-      const response = createRoute(data.slug, data.file);
+      const response = await createRoute(data.slug, data.file);
       return response;
     },
+    onSuccess: async ()=>{
+      await navigate({
+        "from": ""
+      })
+    }
   });
 
   const createForm = useForm({
@@ -140,10 +147,10 @@ export function PPTCreatePage() {
                         return (
                           <button
                             type="submit"
-                            disabled={!isFormValid}
+                            disabled={!isFormValid || mutation.isPending}
                             className="cursor-pointer w-12 h-full flex items-center justify-center bg-[#C43E1C] text-white hover:bg-[#FF8C69] transition-colors disabled:opacity-30 disabled:bg-black"
                           >
-                            <ChevronRight className="h-[50%]" />
+                            {mutation.isPending ? <LoaderCircle className="h-[50%] animate-spin" /> : <ChevronRight className="h-[50%]" />}
                           </button>
                         );
                       }}
