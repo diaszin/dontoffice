@@ -75,8 +75,6 @@ export function PPTCreatePage() {
                   const extension = file.name.split(".").at(-1);
                   const allowedExtensions = [".ppt", ".pps", ".pptx", ".ppsx"];
 
-                  console.log(!allowedExtensions.includes("." + extension));
-
                   if (
                     !extension ||
                     !allowedExtensions.includes("." + extension)
