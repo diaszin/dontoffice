@@ -141,8 +141,8 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
             moveNext();
           }
         }}
-        ref={slideElementRef}
         tabIndex={0} // Para capturar os eventos do teclado em tela cheia
+        ref={slideElementRef}
         className="[&:fullscreen]:cursor-none relative w-full max-w-5xl overflow-hidden rounded-lg bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out"
         style={{ aspectRatio, containerType: "size" }}
       >
