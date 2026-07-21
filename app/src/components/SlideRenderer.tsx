@@ -69,9 +69,9 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
 
   if (loading) {
     return (
-      <div className="flex h-full min-h-100 w-full flex-col items-center justify-center space-y-4 rounded-xl border border-gray-700 bg-gray-900/80 p-8 shadow-2xl backdrop-blur-lg">
-        <Loader2 className="h-10 w-10 animate-spin text-purple-500" />
-        <p className="animate-pulse text-lg font-medium text-gray-300">
+      <div className="flex h-full min-h-100 w-full flex-col items-center justify-center space-y-4 rounded-xl border border-gray-700 bg-gray-100 p-8 shadow-2xl backdrop-blur-lg">
+        <Loader2 className="h-10 w-10 animate-spin text-gray-500" />
+        <p className="animate-pulse text-lg font-medium text-gray-500">
           Processando Apresentação...
         </p>
       </div>
@@ -80,7 +80,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
 
   if (error) {
     return (
-      <div className="flex h-full min-h-100 w-full flex-col items-center justify-center rounded-xl border border-red-500/50 bg-red-950/30 p-8 text-red-400 backdrop-blur-lg">
+      <div className="flex h-full min-h-100 w-full flex-col items-center justify-center rounded-xl border border-red-500 bg-white p-8 text-red-400 backdrop-blur-lg">
         <p>{error}</p>
         <button
           onClick={onClose}
