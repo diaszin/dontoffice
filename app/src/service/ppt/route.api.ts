@@ -15,8 +15,6 @@ export default class PPTRouteApi {
   static async getBySlug(slug: string) {
     const response = await pptApiClient.get(`/route/${slug}/`);
 
-    console.log(response);
-
     return response;
   }
 
@@ -24,8 +22,6 @@ export default class PPTRouteApi {
     const response = await pptApiClient.get(url, {
       responseType: "arraybuffer",
     });
-
-    console.log(response);
 
     return response;
   }
