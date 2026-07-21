@@ -13,17 +13,22 @@ type CreatePageData = {
 };
 
 export function PPTCreatePage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (data: CreatePageData) => {
       const response = await createRoute(data.slug, data.file);
       return response;
     },
-    onSuccess: async ()=>{
+    onSuccess: async ({ data }) => {
+      const slug: string = data.slug;
+      
       await navigate({
-        "from": ""
-      })
-    }
+        to: "/ppt/$slug",
+        params: {
+          slug: slug,
+        },
+      });
+    },
   });
 
   const createForm = useForm({
@@ -150,7 +155,11 @@ export function PPTCreatePage() {
                             disabled={!isFormValid || mutation.isPending}
                             className="cursor-pointer w-12 h-full flex items-center justify-center bg-[#C43E1C] text-white hover:bg-[#FF8C69] transition-colors disabled:opacity-30 disabled:bg-black"
                           >
-                            {mutation.isPending ? <LoaderCircle className="h-[50%] animate-spin" /> : <ChevronRight className="h-[50%]" />}
+                            {mutation.isPending ? (
+                              <LoaderCircle className="h-[50%] animate-spin" />
+                            ) : (
+                              <ChevronRight className="h-[50%]" />
+                            )}
                           </button>
                         );
                       }}
