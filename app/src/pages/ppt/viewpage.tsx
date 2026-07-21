@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 import viewRoute from "../../usecases/ppt/view-route";
 import viewSlideFile from "../../usecases/ppt/view-slide-file";
 import { SlideRenderer } from "../../components/SlideRenderer";
@@ -9,6 +9,8 @@ export default function PPTViewPage() {
   const { slug } = useParams({
     from: "/ppt/$slug",
   });
+
+  const navigate = useNavigate();
 
   const query = useQuery({
     queryKey: ["ppt", slug],
@@ -43,8 +45,17 @@ export default function PPTViewPage() {
   }
 
   return (
-    <div className="h-screen w-full bg-gray-950 p-4 sm:p-8">
-      <SlideRenderer arrayBuffer={query.data.arrayBuffer} />
+    <div className="h-screen w-full p-4 sm:p-8">
+      <SlideRenderer
+        arrayBuffer={query.data.arrayBuffer}
+        closeTitle="Voltar para a página principal"
+        downloadURL={query.data.routeData.upload}
+        onClose={() => {
+          navigate({
+            to: "/ppt",
+          });
+        }}
+      />
     </div>
   );
 }

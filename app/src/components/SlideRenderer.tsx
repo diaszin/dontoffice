@@ -1,19 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  type ButtonHTMLAttributes,
+  useRef,
+} from "react";
 import {
   parsePPTX,
   type PresentationData,
   type SlideElement,
 } from "../utils/pptxParser";
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import {
+  ArrowDownToLine,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  Presentation,
+} from "lucide-react";
 
 interface SlideRendererProps {
   arrayBuffer: ArrayBuffer | null;
   onClose?: () => void;
+  closeTitle?: string;
+  downloadURL?: string;
 }
 
 export const SlideRenderer: React.FC<SlideRendererProps> = ({
   arrayBuffer,
   onClose,
+  closeTitle,
+  downloadURL,
 }) => {
   const [presentation, setPresentation] = useState<PresentationData | null>(
     null,
@@ -21,6 +36,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const slideElementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!arrayBuffer) return;
@@ -70,7 +86,7 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
           onClick={onClose}
           className="mt-4 rounded-lg bg-red-900/50 px-4 py-2 transition-colors hover:bg-red-800/50"
         >
-          Tentar Novamente
+          {closeTitle || "Voltar para a página principal"}
         </button>
       </div>
     );
@@ -82,28 +98,52 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
   const { w: baseW, h: baseH } = presentation.size;
   const aspectRatio = `${baseW} / ${baseH}`;
 
+  const movePrev = () => setCurrentSlideIndex((prev) => Math.max(0, prev - 1));
+  const moveNext = () =>
+    setCurrentSlideIndex((prev) =>
+      Math.min(presentation.slides.length - 1, prev + 1),
+    );
+
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-gray-950 to-gray-900 p-6 shadow-2xl ring-1 ring-white/10">
+    <div className="relative flex h-full w-full  flex-col gap-4 items-center justify-center overflow-hidden rounded-2xl  from-gray-950 to-gray-900 p-6 shadow-2xl ring-1 ring-white/10">
       {/* Header Controls */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-4">
+      <div className="flex flex-row w-full max-w-5xl items-center justify-between p-4">
         <div className="flex items-center space-x-2">
-          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+          <span className="rounded-full border bg-white px-3 py-1 font-ds-subtitle backdrop-blur-md">
             Slide {currentSlideIndex + 1} / {presentation.slides.length}
           </span>
         </div>
-        {onClose && (
-          <button
-            onClick={onClose}
-            className="rounded-full bg-white/5 p-2 text-gray-400 transition-all hover:bg-white/10 hover:text-white"
+        <div className="flex items-center justify-center gap-3">
+          <a
+            href={downloadURL}
+            download
+            className="cursor-pointer group rounded-full p-2 transition-all hover:bg-gray-900  disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Fechar
+            <ArrowDownToLine className="size-[--icon-size] group-hover:text-white" />
+          </a>
+          <button
+            onClick={() => {
+              slideElementRef.current?.requestFullscreen();
+              slideElementRef.current?.focus();
+            }}
+            className="cursor-pointer group rounded-full p-2 transition-all hover:bg-gray-900  disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Presentation className="size-[--icon-size] group-hover:text-white" />
           </button>
-        )}
+        </div>
       </div>
-
       {/* Slide Container */}
       <div
-        className="relative w-full max-w-5xl overflow-hidden rounded-lg bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out"
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft") {
+            movePrev();
+          } else if (event.key === "ArrowRight") {
+            moveNext();
+          }
+        }}
+        ref={slideElementRef}
+        tabIndex={0} // Para capturar os eventos do teclado em tela cheia
+        className="[&:fullscreen]:cursor-none relative w-full max-w-5xl overflow-hidden rounded-lg bg-white shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-transform duration-500 ease-out"
         style={{ aspectRatio, containerType: "size" }}
       >
         {currentSlide ? (
@@ -134,40 +174,27 @@ export const SlideRenderer: React.FC<SlideRendererProps> = ({
       </div>
 
       {/* Navigation Controls */}
-      <div className="absolute bottom-6 flex items-center space-x-6 rounded-full bg-gray-900/80 px-6 py-3 shadow-xl backdrop-blur-md ring-1 ring-white/10">
-        <button
-          onClick={() => setCurrentSlideIndex((prev) => Math.max(0, prev - 1))}
-          disabled={currentSlideIndex === 0}
-          className="group rounded-full bg-white/5 p-2 transition-all hover:bg-white/10 disabled:opacity-50"
-        >
-          <ChevronLeft className="h-6 w-6 text-gray-300 group-hover:text-white" />
-        </button>
+      <div className="bottom-6 flex items-center space-x-6 rounded-full bg-gray-300 px-6 py-3 shadow-xl backdrop-blur-md ring-1 ring-white/10">
+        <RoundIconButton onClick={movePrev} disabled={currentSlideIndex === 0}>
+          <ChevronLeft className="h-6 w-6 text-gray-100 group-hover:text-white" />
+        </RoundIconButton>
 
         <div className="flex space-x-1.5 max-w-[40vw] overflow-x-auto p-1">
           {presentation.slides.map((_, idx) => (
-            <button
+            <ItemBulletPoint
               key={idx}
               onClick={() => setCurrentSlideIndex(idx)}
-              className={`h-2 shrink-0 rounded-full transition-all duration-300 ${
-                idx === currentSlideIndex
-                  ? "w-6 bg-purple-500"
-                  : "w-2 bg-gray-600 hover:bg-gray-400"
-              }`}
+              isSelected={idx === currentSlideIndex}
             />
           ))}
         </div>
 
-        <button
-          onClick={() =>
-            setCurrentSlideIndex((prev) =>
-              Math.min(presentation.slides.length - 1, prev + 1),
-            )
-          }
+        <RoundIconButton
+          onClick={moveNext}
           disabled={currentSlideIndex === presentation.slides.length - 1}
-          className="group rounded-full bg-white/5 p-2 transition-all hover:bg-white/10 disabled:opacity-50"
         >
-          <ChevronRight className="h-6 w-6 text-gray-300 group-hover:text-white" />
-        </button>
+          <ChevronRight className="h-6 w-6 text-gray-100 group-hover:text-white" />
+        </RoundIconButton>
       </div>
     </div>
   );
@@ -357,4 +384,35 @@ const RenderElement = ({
   }
 
   return null;
+};
+
+const RoundIconButton = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      onClick={props.onClick}
+      disabled={props.disabled}
+      className="cursor-pointer group rounded-full bg-gray-700 p-2 transition-all hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {props.children}
+    </button>
+  );
+};
+
+const ItemBulletPoint = ({
+  isSelected,
+  onClick,
+}: {
+  isSelected: boolean;
+  onClick: () => void;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`h-2 shrink-0 rounded-full transition-all duration-300 ${
+        isSelected
+          ? "w-6 bg-[#C43E1C]"
+          : "w-2 bg-gray-600 hover:bg-gray-400 cursor-pointer"
+      }`}
+    />
+  );
 };
