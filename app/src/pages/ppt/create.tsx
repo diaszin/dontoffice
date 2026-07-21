@@ -6,6 +6,7 @@ import { ChevronRight, LoaderCircle } from "lucide-react";
 import createRoute from "../../usecases/ppt/create-route";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import type { AxiosError } from "axios";
 
 type CreatePageData = {
   slug: string;
@@ -21,13 +22,23 @@ export function PPTCreatePage() {
     },
     onSuccess: async ({ data }) => {
       const slug: string = data.slug;
-      
+
       await navigate({
         to: "/ppt/$slug",
         params: {
           slug: slug,
         },
       });
+    },
+    onError: async (error: AxiosError, data) => {
+      if (error.status === 400) {
+        await navigate({
+          to: "/ppt/$slug",
+          params: {
+            slug: data.slug,
+          },
+        });
+      }
     },
   });
 
