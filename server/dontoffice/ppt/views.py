@@ -1,12 +1,4 @@
-import mimetypes
-import os
-
-from django.contrib.auth.models import Group, User
-from django.db.models.fields.files import FieldFile
-from django.http import FileResponse
-from rest_framework import permissions, status, views, viewsets
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from dontoffice.ppt.models import PPTRoute
