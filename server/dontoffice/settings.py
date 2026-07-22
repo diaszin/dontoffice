@@ -107,6 +107,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "dontoffice.wsgi.application"
 
+MEDIA_URL = "/upload/"
 MEDIA_ROOT = BASE_DIR / "upload"
 
 
