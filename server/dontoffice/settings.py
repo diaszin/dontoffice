@@ -72,7 +72,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "dontoffice.urls"
 
-CORS_ALLOWED_ORIGINS = os.getenv("ALLOWED_URLS", "").split(",")
+ALLOWED_URLS = (
+    os.getenv("ALLOWED_URLS", "localhost:5173").split(",")
+    if os.getenv("ALLOWED_URLS") is not None
+    else []
+)
+CORS_ALLOWED_ORIGINS = ALLOWED_URLS
 
 
 TEMPLATES = [
@@ -113,6 +118,7 @@ DATABASES = {
     }
 }
 
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -144,4 +150,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
