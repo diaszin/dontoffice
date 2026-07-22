@@ -30,3 +30,8 @@ yarn.lock
 # Arquivo gerado por bibliotecas
 
 **/routeTree.gen.ts
+cypress/screenshots/
+cypress/fixtures/
+
+.env
+.env.*
