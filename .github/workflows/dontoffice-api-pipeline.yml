@@ -73,6 +73,6 @@ jobs:
       - name: Deploy
         uses: azure/webapps-deploy@v3
         with:
-          app-name: dontoffice-server
+          app-name: dontoffice-api
           slot-name: Production
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_972F24F84DE64AA9BB10FE1B94C52B7E }}
