@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'api/**'
+      - 'server/**'
   workflow_dispatch:
 
 jobs:
@@ -31,12 +31,12 @@ jobs:
           poetry self add poetry-plugin-export
 
       - name: Install dependencies
-        working-directory: ./api
+        working-directory: ./server
         run: |
           poetry install --only main --no-interaction
 
       - name: Export requirements.txt
-        working-directory: ./api
+        working-directory: ./server
         run: |
           poetry export \
             --format=requirements.txt \
@@ -44,14 +44,14 @@ jobs:
             --without-hashes
 
       - name: Run tests
-        working-directory: ./api
+        working-directory: ./server
         run: |
           poetry run pytest || true
 
       - name: Prepare deployment package
         run: |
           mkdir deploy
-          cp -R api/. deploy/
+          cp -R server/. deploy/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -73,6 +73,6 @@ jobs:
       - name: Deploy
         uses: azure/webapps-deploy@v3
         with:
-          app-name: dontoffice-api
+          app-name: dontoffice-server
           slot-name: Production
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_972F24F84DE64AA9BB10FE1B94C52B7E }}
