@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 
 ALLOWED_HOSTS = [
     "*",
@@ -42,6 +42,7 @@ TIME_ZONE = "America/Sao_Paulo"
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "storages",
     "dontoffice.ppt",
     "corsheaders",
 ]
@@ -81,10 +83,25 @@ ALLOWED_URLS = (
 CORS_ALLOWED_ORIGINS = ALLOWED_URLS
 
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")
+AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")
+AZURE_CONTAINER = os.getenv("AZURE_CONTAINER")
+
+PRODUCTION_STORAGE_CRED = {
+    "BACKEND": "storages.backends.azure_storage.AzureStorage",
+    "OPTIONS": {
+        "account_name": AZURE_ACCOUNT_NAME,
+        "account_key": AZURE_ACCOUNT_KEY,
+        "azure_container": AZURE_CONTAINER,
     },
+}
+
+LOCAL_STORAGE_KEY = {
+    "BACKEND": "django.core.files.storage.FileSystemStorage",
+}
+
+STORAGES = {
+    "default": LOCAL_STORAGE_KEY if DEBUG else PRODUCTION_STORAGE_CRED,
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -107,7 +124,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "dontoffice.wsgi.application"
 
-MEDIA_URL = "/upload/"
+MEDIA_URL = "/upload"
 MEDIA_ROOT = BASE_DIR / "upload"
 
 
@@ -154,8 +171,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
