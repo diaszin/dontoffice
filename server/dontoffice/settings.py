@@ -142,6 +142,7 @@ DATABASES = {
         "OPTIONS": {
             "driver": "ODBC Driver 18 for SQL Server",
             "extra_params": "Encrypt=no;TrustServerCertificate=yes;",
+            "connect_timeout": 10,
         },
     }
 }
