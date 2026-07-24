@@ -23,7 +23,6 @@ class RouteViewSet(viewsets.ModelViewSet):
         if created_route:
             serializer = self.get_serializer(created_route, data=request.data, partial=True)
             serializer.is_valid(raise_exception=True)
-            print(serializer.is_valid())
             status_response = status.HTTP_200_OK
         else:
             serializer.is_valid(raise_exception=True)
